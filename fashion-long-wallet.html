@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时尚长款钱包系列 - T&C STUDIO</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 顶部标题区域 -->
+    <header class="header">
+        <div class="logo-container">
+            <img src="images/tc-logo.png" alt="T&C STUDIO Logo" class="logo">
+            <h1>T&C STUDIO</h1>
+        </div>
+        
+        <!-- 导航菜单 -->
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="#new">新品推荐</a></li>
+                <li><a href="products.html" class="active">产品系列</a></li>
+                <li><a href="about.html">销售平台</a></li>
+                <li><a href="about-us.html">关于我们</a></li>
+                <li><a href="contact.html">联系我们</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 产品展示区域 -->
+    <section class="category-showcase">
+        <div class="showcase-container">
+            <h2 class="section-title">时尚长款钱包系列</h2>
+            
+            <div class="product-grid">
+                <!-- 1号款 -->
+                <div class="product-item">
+                    <img src="images/products/wallet-women-1-1.jpg" alt="时尚长款钱包1号" class="main-image">
+                    <h3>时尚长款钱包1号</h3>
+                    <p class="price">1 peso起</p>
+                    <div class="color-options">
+                        <div class="color-item" onclick="changeImage(this, 'images/products/wallet-women-1-1-black.jpg')">
+                            <img src="images/products/wallet-women-1-1-black.jpg" alt="黑色">
+                        </div>
+                        <div class="color-item" onclick="changeImage(this, 'images/products/wallet-women-1-1-brown.jpg')">
+                            <img src="images/products/wallet-women-1-1-brown.jpg" alt="棕色">
+                        </div>
+                        <div class="color-item" onclick="changeImage(this, 'images/products/wallet-women-1-1-beige.jpg')">
+                            <img src="images/products/wallet-women-1-1-beige.jpg" alt="米色">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2号款 -->
+                <div class="product-item">
+                    <img src="images/products/wallet-women-1-2.jpg" alt="时尚长款钱包2号" class="main-image">
+                    <h3>时尚长款钱包2号</h3>
+                    <p class="price">1 peso起</p>
+                    <div class="color-options">
+                        <div class="color-item" onclick="changeImage(this, 'images/products/wallet-women-1-2-black.jpg')">
+                            <img src="images/products/wallet-women-1-2-black.jpg" alt="黑色">
+                        </div>
+                        <div class="color-item" onclick="changeImage(this, 'images/products/wallet-women-1-2-brown.jpg')">
+                            <img src="images/products/wallet-women-1-2-brown.jpg" alt="棕色">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3号款到6号款使用相同的结构 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 页面底部 -->
+    <footer class="footer">
+        <div class="contact-info">
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <p>09629699456</p>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <p>TCstudio1@outlook.com</p>
+            </div>
+            <div class="social-media">
+                <a href="javascript:void(0)"><i class="fab fa-weixin"></i></a>
+                <a href="javascript:void(0)"><i class="fab fa-viber"></i></a>
+                <a href="javascript:void(0)"><i class="fab fa-facebook"></i></a>
+                <a href="javascript:void(0)"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>Copyright © T&C STUDIO 2024. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function changeImage(item, src) {
+            const mainImage = item.parentElement.parentElement.previousElementSibling.previousElementSibling.previousElementSibling;
+            mainImage.src = src;
+        }
+    </script>
+</body>
+</html> 
