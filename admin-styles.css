@@ -296,4 +296,216 @@
 
 .send-code-btn:hover {
     background: #b89530;
+}
+
+/* 返回首页按钮样式 */
+.back-home {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.back-home:hover {
+    background: #D4AF37;
+    transform: translateY(-2px);
+}
+
+.back-home i {
+    font-size: 18px;
+}
+
+.back-home span {
+    font-size: 14px;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .back-home {
+        padding: 8px 12px;
+    }
+    
+    .back-home span {
+        display: none;  /* 在移动端只显示图标 */
+    }
+}
+
+/* 产品管理表单样式 */
+.product-form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.color-options-container {
+    margin: 10px 0;
+}
+
+.color-option {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.color-name {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.color-image {
+    flex: 2;
+}
+
+.remove-color {
+    padding: 8px 12px;
+    background: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.remove-color:hover {
+    background: #cc0000;
+}
+
+/* 表单组样式 */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.form-group input[type="url"] {
+    font-family: monospace;
+}
+
+/* 加载指示器样式 */
+.loading-indicator {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.loading-indicator.show {
+    display: flex;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #D4AF37;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 产品列表样式 */
+.product-list {
+    margin-top: 20px;
+}
+
+.product-item {
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-info {
+    flex: 1;
+}
+
+.product-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-btn, .delete-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.edit-btn {
+    background: #4CAF50;
+    color: white;
+}
+
+.delete-btn {
+    background: #f44336;
+    color: white;
+}
+
+/* 模态框样式 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 800px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 24px;
+    cursor: pointer;
 } 

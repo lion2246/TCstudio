@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>时尚长款钱包系列 - T&C STUDIO</title>
+    <title>休闲渔夫帽系列 - T&C STUDIO</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -32,23 +32,23 @@
     <!-- 产品展示区域 -->
     <section class="category-showcase">
         <div class="showcase-container">
-            <h2 class="section-title">时尚长款钱包系列</h2>
+            <h2 class="section-title">休闲渔夫帽系列</h2>
             
             <div class="product-grid">
                 <!-- 1号款 -->
                 <div class="product-item">
-                    <img src="images/products/wallet-women-1-1.jpg" alt="时尚长款钱包1号" class="main-image">
-                    <h3>时尚长款钱包1号</h3>
+                    <img src="images/products/casual-bucket-1.jpg" alt="休闲渔夫帽1号" class="main-image">
+                    <h3>休闲渔夫帽1号</h3>
                     <p class="price">1 peso起</p>
                     <div class="color-options">
                         <div class="color-grid">
                             <div class="color-item">
-                                <img src="images/products/wallet-women-1-1-black.jpg" alt="黑色">
-                                <span>黑色</span>
+                                <img src="images/products/casual-bucket-1-gray.jpg" alt="灰色">
+                                <span>灰色</span>
                             </div>
                             <div class="color-item">
-                                <img src="images/products/wallet-women-1-1-brown.jpg" alt="棕色">
-                                <span>棕色</span>
+                                <img src="images/products/casual-bucket-1-khaki.jpg" alt="卡其色">
+                                <span>卡其色</span>
                             </div>
                         </div>
                     </div>
@@ -70,20 +70,13 @@
 
                 <!-- 2号款 -->
                 <div class="product-item">
-                    <img src="images/products/wallet-women-1-2.jpg" alt="时尚长款钱包2号" class="main-image">
-                    <h3>时尚长款钱包2号</h3>
-                    <p class="price">1 peso起</p>
-                    <div class="color-options">
-                        <div class="color-item" onclick="changeImage(this, 'images/products/wallet-women-1-2-black.jpg')">
-                            <img src="images/products/wallet-women-1-2-black.jpg" alt="黑色">
-                        </div>
-                        <div class="color-item" onclick="changeImage(this, 'images/products/wallet-women-1-2-brown.jpg')">
-                            <img src="images/products/wallet-women-1-2-brown.jpg" alt="棕色">
-                        </div>
-                    </div>
+                    <!-- 类似的结构，不同的图片和颜色选项 -->
                 </div>
 
-                <!-- 3号款到6号款使用相同的结构 -->
+                <!-- 3号款 -->
+                <div class="product-item">
+                    <!-- 类似的结构，不同的图片和颜色选项 -->
+                </div>
             </div>
         </div>
     </section>
@@ -109,15 +102,25 @@
         <div class="copyright">
             <p>Copyright © T&C STUDIO 2024. All rights reserved.</p>
         </div>
+
+        <!-- 微信二维码浮动窗 -->
+        <div id="wechat-qr" class="floating-qr">
+            <div class="qr-content">
+                <h3>扫描二维码关注微信</h3>
+                <img src="images/qr/wechat-qr.png" alt="WeChat QR Code" class="qr-code">
+            </div>
+        </div>
+
+        <!-- Viber二维码浮动窗 -->
+        <div id="viber-qr" class="floating-qr">
+            <div class="qr-content">
+                <h3>扫描二维码添加 Viber</h3>
+                <img src="images/qr/viber-qr.png" alt="Viber QR Code" class="qr-code">
+            </div>
+        </div>
     </footer>
 
-    <script>
-        function changeImage(item, src) {
-            const mainImage = item.parentElement.parentElement.previousElementSibling.previousElementSibling.previousElementSibling;
-            mainImage.src = src;
-        }
-    </script>
-
+    <!-- 管理员入口浮标 -->
     <a href="login.html" class="admin-entry">
         <i class="fas fa-user-shield"></i>
     </a>
