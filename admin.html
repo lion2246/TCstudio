@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理后台 - T&C STUDIO</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-container">
+        <header class="admin-header">
+            <h1>T&C STUDIO 管理后台</h1>
+        </header>
+
+        <main class="admin-content">
+            <!-- 图片上传区域 -->
+            <section class="upload-section">
+                <h2>图片上传</h2>
+                <div class="upload-area">
+                    <form id="uploadForm" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="imageCategory">选择类别:</label>
+                            <select id="imageCategory" name="category" required>
+                                <option value="">请选择类别</option>
+                                <option value="products">产品图片</option>
+                                <option value="banners">轮播图</option>
+                                <option value="qr">二维码</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="imageSubCategory">选择子类别:</label>
+                            <select id="imageSubCategory" name="subCategory">
+                                <option value="">请选择子类别</option>
+                                <!-- 选项将通过 JavaScript 动态加载 -->
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="imageFile">选择图片:</label>
+                            <input type="file" id="imageFile" name="image" accept="image/*" multiple required>
+                        </div>
+
+                        <div class="image-preview" id="imagePreview">
+                            <!-- 预览图片将在这里显示 -->
+                        </div>
+
+                        <button type="submit" class="admin-btn">上传图片</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- 图片管理区域 -->
+            <section class="manage-section">
+                <h2>图片管理</h2>
+                <div class="filter-area">
+                    <select id="filterCategory">
+                        <option value="">所有类别</option>
+                        <option value="products">产品图片</option>
+                        <option value="banners">轮播图</option>
+                        <option value="qr">二维码</option>
+                    </select>
+                </div>
+                <div class="image-grid" id="imageGrid">
+                    <!-- 图片将通过 JavaScript 动态加载 -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // 类别和子类别的映射关系
+        const categoryMap = {
+            'products': [
+                '女士钱包', '女士背包', '女士单肩包',
+                '男士钱包', '男士背包', '男士单肩包',
+                '行李箱', '旅行包', '帽子'
+            ],
+            'banners': ['首页轮播', '产品展示'],
+            'qr': ['微信二维码', 'Viber二维码']
+        };
+
+        // 当选择主类别时更新子类别
+        document.getElementById('imageCategory').addEventListener('change', function() {
+            const subCategory = document.getElementById('imageSubCategory');
+            const category = this.value;
+            
+            // 清空现有选项
+            subCategory.innerHTML = '<option value="">请选择子类别</option>';
+            
+            if (category && categoryMap[category]) {
+                categoryMap[category].forEach(sub => {
+                    const option = document.createElement('option');
+                    option.value = sub;
+                    option.textContent = sub;
+                    subCategory.appendChild(option);
+                });
+            }
+        });
+
+        // 图片预览功能
+        document.getElementById('imageFile').addEventListener('change', function(e) {
+            const preview = document.getElementById('imagePreview');
+            preview.innerHTML = '';
+            
+            [...e.target.files].forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.className = 'preview-img';
+                    preview.appendChild(img);
+                }
+                reader.readAsDataURL(file);
+            });
+        });
+
+        // 表单提交处理
+        document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            try {
+                const response = await fetch('/api/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (response.ok) {
+                    alert('图片上传成功！');
+                    loadImages(); // 重新加载图片列表
+                } else {
+                    throw new Error('上传失败');
+                }
+            } catch (error) {
+                alert('上传失败：' + error.message);
+            }
+        });
+
+        // 加载图片列表
+        async function loadImages() {
+            const category = document.getElementById('filterCategory').value;
+            try {
+                const response = await fetch(`/api/images?category=${category}`);
+                const images = await response.json();
+                
+                const grid = document.getElementById('imageGrid');
+                grid.innerHTML = '';
+                
+                images.forEach(image => {
+                    const div = document.createElement('div');
+                    div.className = 'image-item';
+                    div.innerHTML = `
+                        <img src="${image.url}" alt="${image.name}">
+                        <div class="image-info">
+                            <p>${image.name}</p>
+                            <button onclick="deleteImage('${image.id}')" class="delete-btn">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                    grid.appendChild(div);
+                });
+            } catch (error) {
+                console.error('加载图片失败：', error);
+            }
+        }
+
+        // 删除图片
+        async function deleteImage(id) {
+            if (confirm('确定要删除这张图片吗？')) {
+                try {
+                    const response = await fetch(`/api/images/${id}`, {
+                        method: 'DELETE'
+                    });
+                    
+                    if (response.ok) {
+                        alert('删除成功！');
+                        loadImages(); // 重新加载图片列表
+                    } else {
+                        throw new Error('删除失败');
+                    }
+                } catch (error) {
+                    alert('删除失败：' + error.message);
+                }
+            }
+        }
+
+        // 初始加载
+        loadImages();
+    </script>
+</body>
+</html> 
