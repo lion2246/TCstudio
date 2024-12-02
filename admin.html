@@ -12,6 +12,10 @@
     <div class="admin-container">
         <header class="admin-header">
             <h1>T&C STUDIO 管理后台</h1>
+            <div class="admin-user">
+                <span id="adminUsername"></span>
+                <button onclick="logout()" class="logout-btn">退出登录</button>
+            </div>
         </header>
 
         <main class="admin-content">
@@ -190,6 +194,25 @@
 
         // 初始加载
         loadImages();
+
+        // 检查登录状态
+        if (!localStorage.getItem('adminLoggedIn')) {
+            window.location.href = 'login.html';
+        } else {
+            // 显示管理员用户名
+            document.getElementById('adminUsername').textContent = 
+                localStorage.getItem('adminUsername') || 'Admin';
+        }
+
+        // 登出功能
+        function logout() {
+            if (confirm('确定要退出登录吗？')) {
+                localStorage.removeItem('adminLoggedIn');
+                localStorage.removeItem('adminUsername');
+                localStorage.removeItem('loginTime');
+                window.location.href = 'login.html';
+            }
+        }
     </script>
 </body>
 </html> 

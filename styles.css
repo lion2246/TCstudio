@@ -1798,3 +1798,48 @@ html {
     height: 30px;
     padding: 2px;
 }
+
+/* 管理员入口链接样式 */
+.admin-link {
+    display: block;
+    margin-top: 10px;
+    color: #999;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: color 0.3s ease;
+}
+
+.admin-link:hover {
+    color: #D4AF37;
+}
+
+/* 或者悬浮按钮样式 */
+.admin-entry {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.admin-entry:hover {
+    background: #D4AF37;
+    transform: translateY(-2px);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .admin-entry {
+        bottom: 20px;
+        right: 20px;
+    }
+}
