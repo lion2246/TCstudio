@@ -1,249 +1,126 @@
-/* 管理后台整体样式 */
-.admin-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.admin-header {
-    margin-bottom: 30px;
-    padding: 20px 0;
-    border-bottom: 2px solid #D4AF37;
-}
-
-.admin-header h1 {
-    color: #333;
-    font-size: 24px;
-}
-
-/* 上传区域样式 */
-.upload-section {
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    margin-bottom: 30px;
-}
-
-.upload-area {
-    padding: 20px;
-    border: 2px dashed #ddd;
-    border-radius: 8px;
-    margin-top: 20px;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    color: #333;
-    font-weight: 600;
-}
-
-.form-group select,
-.form-group input[type="file"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-/* 图片预览区域 */
-.image-preview {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 15px;
-    margin: 20px 0;
-}
-
-.preview-img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 4px;
-}
-
-/* 按钮样式 */
-.admin-btn {
-    background: #D4AF37;
-    color: #fff;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background 0.3s ease;
-}
-
-.admin-btn:hover {
-    background: #b89530;
-}
-
-/* 图片管理区域 */
-.manage-section {
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.filter-area {
-    margin-bottom: 20px;
-}
-
-.filter-area select {
-    padding: 8px 16px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-.image-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-}
-
-.image-item {
-    position: relative;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.image-item img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-.image-info {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 10px;
-    background: rgba(0,0,0,0.7);
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.delete-btn {
-    background: none;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    padding: 5px;
-}
-
-.delete-btn:hover {
-    color: #ff4444;
-}
-
-/* 响应式调整 */
-@media (max-width: 768px) {
-    .admin-container {
-        padding: 10px;
-    }
-    
-    .image-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    }
-    
-    .image-item img {
-        height: 150px;
-    }
-}
-
 /* 登录页面样式 */
 .login-page {
-    background: #f5f5f5;
     min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 20px;
 }
 
 .login-container {
     width: 100%;
     max-width: 400px;
-    padding: 20px;
 }
 
 .login-box {
-    background: #fff;
+    background: white;
     padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .login-box h1 {
-    color: #333;
-    font-size: 24px;
+    color: #D4AF37;
+    text-align: center;
     margin-bottom: 10px;
+    font-size: 28px;
 }
 
 .login-box h2 {
-    color: #666;
-    font-size: 18px;
+    color: #333;
+    text-align: center;
     margin-bottom: 30px;
+    font-size: 20px;
 }
 
 .login-form .form-group {
     margin-bottom: 20px;
-    text-align: left;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: 500;
 }
 
 .login-form input {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    padding: 12px 15px;
+    border: 2px solid #eee;
+    border-radius: 8px;
     font-size: 16px;
+    transition: all 0.3s ease;
 }
 
 .login-form input:focus {
     border-color: #D4AF37;
     outline: none;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
 }
 
-.login-form button {
+.login-form .admin-btn {
     width: 100%;
     padding: 12px;
     background: #D4AF37;
-    color: #fff;
+    color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     font-size: 16px;
+    font-weight: 600;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
 }
 
-.login-form button:hover {
-    background: #b89530;
+.login-form .admin-btn:hover {
+    background: #c19b2f;
+    transform: translateY(-1px);
 }
 
-/* 密码重置相关样式 */
 .forgot-password {
-    margin-top: 15px;
     text-align: center;
+    margin-top: 15px;
 }
 
 .forgot-password a {
     color: #666;
     text-decoration: none;
-    font-size: 0.9em;
+    font-size: 14px;
+    transition: color 0.3s ease;
 }
 
 .forgot-password a:hover {
     color: #D4AF37;
 }
 
+/* 返回首页按钮样式 */
+.back-home {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background: white;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.back-home:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.back-home i {
+    margin-right: 8px;
+    color: #D4AF37;
+}
+
+/* 密码重置弹窗样式 */
 .modal {
     display: none;
     position: fixed;
@@ -251,19 +128,31 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 1000;
+    backdrop-filter: blur(5px);
 }
 
 .modal-content {
-    position: relative;
-    background: #fff;
-    margin: 10% auto;
-    padding: 30px;
+    background: white;
     width: 90%;
-    max-width: 500px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 15px;
+    position: relative;
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .close {
@@ -271,8 +160,13 @@
     right: 20px;
     top: 15px;
     font-size: 24px;
-    cursor: pointer;
     color: #666;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover {
+    color: #D4AF37;
 }
 
 .verification-code-group {
@@ -285,227 +179,31 @@
 }
 
 .send-code-btn {
-    padding: 8px 15px;
-    background: #D4AF37;
-    color: #fff;
+    padding: 0 15px;
+    background: #f0f0f0;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
+    color: #333;
     cursor: pointer;
+    transition: all 0.3s ease;
     white-space: nowrap;
 }
 
 .send-code-btn:hover {
-    background: #b89530;
-}
-
-/* 返回首页按钮样式 */
-.back-home {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 15px;
-    background: rgba(0, 0, 0, 0.6);
-    color: #fff;
-    text-decoration: none;
-    border-radius: 25px;
-    transition: all 0.3s ease;
-    z-index: 1000;
-}
-
-.back-home:hover {
-    background: #D4AF37;
-    transform: translateY(-2px);
-}
-
-.back-home i {
-    font-size: 18px;
-}
-
-.back-home span {
-    font-size: 14px;
+    background: #e0e0e0;
 }
 
 /* 响应式调整 */
-@media (max-width: 768px) {
-    .back-home {
-        padding: 8px 12px;
+@media (max-width: 480px) {
+    .login-box {
+        padding: 30px 20px;
     }
     
     .back-home span {
-        display: none;  /* 在移动端只显示图标 */
+        display: none;
     }
-}
-
-/* 产品管理表单样式 */
-.product-form {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.color-options-container {
-    margin: 10px 0;
-}
-
-.color-option {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-    align-items: center;
-}
-
-.color-name {
-    flex: 1;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-.color-image {
-    flex: 2;
-}
-
-.remove-color {
-    padding: 8px 12px;
-    background: #ff4444;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.remove-color:hover {
-    background: #cc0000;
-}
-
-/* 表单组样式 */
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-}
-
-.form-group input,
-.form-group select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-.form-group input[type="url"] {
-    font-family: monospace;
-}
-
-/* 加载指示器样式 */
-.loading-indicator {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 9999;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.loading-indicator.show {
-    display: flex;
-}
-
-.spinner {
-    width: 50px;
-    height: 50px;
-    border: 5px solid #f3f3f3;
-    border-top: 5px solid #D4AF37;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* 产品列表样式 */
-.product-list {
-    margin-top: 20px;
-}
-
-.product-item {
-    background: #fff;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.product-info {
-    flex: 1;
-}
-
-.product-actions {
-    display: flex;
-    gap: 10px;
-}
-
-.edit-btn, .delete-btn {
-    padding: 8px 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.edit-btn {
-    background: #4CAF50;
-    color: white;
-}
-
-.delete-btn {
-    background: #f44336;
-    color: white;
-}
-
-/* 模态框样式 */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-}
-
-.modal-content {
-    background: #fff;
-    margin: 5% auto;
-    padding: 20px;
-    width: 80%;
-    max-width: 800px;
-    border-radius: 8px;
-    position: relative;
-}
-
-.close {
-    position: absolute;
-    right: 20px;
-    top: 10px;
-    font-size: 24px;
-    cursor: pointer;
+    
+    .back-home i {
+        margin: 0;
+    }
 } 

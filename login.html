@@ -21,12 +21,12 @@
             <h2>管理员登录</h2>
             <form id="loginForm" class="login-form">
                 <div class="form-group">
-                    <label for="username">用户名</label>
-                    <input type="text" id="username" name="username" required>
+                    <label for="email">邮箱</label>
+                    <input type="email" id="email" name="email" value="admin@tcstudio.com" required>
                 </div>
                 <div class="form-group">
                     <label for="password">密码</label>
-                    <input type="password" id="password" name="password" required>
+                    <input type="password" id="password" name="password" placeholder="请输入密码" required>
                 </div>
                 <button type="submit" class="admin-btn">登录</button>
                 <div class="forgot-password">
@@ -67,20 +67,44 @@
     </div>
 
     <script>
+        // API 基础地址
+        const API_BASE_URL = 'http://你的阿里云IP:3000/api';
+
         // 登录验证
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            if (username === 'admin' && password === '.sY740923279') {
-                localStorage.setItem('adminLoggedIn', 'true');
-                localStorage.setItem('adminUsername', username);
-                localStorage.setItem('loginTime', new Date().toISOString());
-                window.location.href = 'admin.html';
-            } else {
-                alert('用户名或密码错误！');
-                document.getElementById('password').value = '';
+            try {
+                console.log('尝试登录:', { email, password });
+
+                const response = await fetch(`${API_BASE_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                console.log('服务器响应状态:', response.status);
+
+                const data = await response.json();
+                console.log('服务器响应数据:', data);
+
+                if (data.token) {
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('adminLoggedIn', 'true');
+                    localStorage.setItem('adminEmail', email);
+                    localStorage.setItem('loginTime', new Date().toISOString());
+                    window.location.href = 'admin.html';
+                } else {
+                    alert('登录失败：' + (data.error || '未知错误'));
+                    document.getElementById('password').value = '';
+                }
+            } catch (error) {
+                console.error('登录错误:', error);
+                alert('登录失败，请检查网络连接和服务器状态');
             }
         });
 
@@ -95,39 +119,66 @@
         }
 
         // 发送验证码
-        let verificationCode = '';
-        function sendVerificationCode() {
-            // 生成6位随机验证码
-            verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
-            alert(`验证码已发送到邮箱：${verificationCode}`);
-            // 实际应用中这里应该调用后端API发送邮件
+        async function sendVerificationCode() {
+            const email = document.getElementById('resetEmail').value;
+            try {
+                const response = await fetch(`${API_BASE_URL}/auth/send-verification`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email })
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    alert('验证码已发送到邮箱');
+                } else {
+                    alert('发送验证码失败：' + (data.error || '未知错误'));
+                }
+            } catch (error) {
+                console.error('发送验证码错误:', error);
+                alert('发送验证码失败，请检查网络连接');
+            }
         }
 
         // 密码重置表单提交
-        document.getElementById('resetPasswordForm').addEventListener('submit', function(e) {
+        document.getElementById('resetPasswordForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            const inputCode = document.getElementById('verificationCode').value;
+            const email = document.getElementById('resetEmail').value;
+            const code = document.getElementById('verificationCode').value;
             const newPassword = document.getElementById('newPassword').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
-
-            if (!verificationCode) {
-                alert('请先获取验证码');
-                return;
-            }
-
-            if (inputCode !== verificationCode) {
-                alert('验证码错误');
-                return;
-            }
 
             if (newPassword !== confirmPassword) {
                 alert('两次输入的密码不一致');
                 return;
             }
 
-            // 这里应该调用后端API更新密码
-            alert('密码重置成功！');
-            closeResetPassword();
+            try {
+                const response = await fetch(`${API_BASE_URL}/auth/reset-password`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email,
+                        code,
+                        newPassword
+                    })
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    alert('密码重置成功！');
+                    closeResetPassword();
+                } else {
+                    alert('密码重置失败：' + (data.error || '未知错误'));
+                }
+            } catch (error) {
+                console.error('密码重置错误:', error);
+                alert('密码重置失败，请检查网络连接');
+            }
         });
     </script>
 </body>

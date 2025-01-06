@@ -461,9 +461,12 @@ body {
 
 .platforms-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 30px;
     margin-top: 50px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .platform-card {
@@ -476,6 +479,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-height: 350px;
+    justify-content: center;
 }
 
 .platform-card:hover {
@@ -539,7 +544,8 @@ body {
 /* 响应式调整 */
 @media (max-width: 768px) {
     .platforms-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
     
     .platform-icon {
@@ -567,8 +573,8 @@ body {
 }
 
 /* TikTok 图标特定样式 */
-.platform-card:last-child .platform-icon {
-    background: #000;  /* TikTok logo 的黑色背景 */
+.platform-card.tiktok .platform-icon {
+    background: #000;
     border-radius: 15px;
     padding: 20px;
     width: 150px;
@@ -578,11 +584,17 @@ body {
     align-items: center;
 }
 
-.platform-card:last-child .platform-logo {
+.platform-card.tiktok .platform-logo {
     width: 100%;
     height: 100%;
-    object-fit: contain;  /* 确保图片完整显示 */
+    object-fit: contain;
     padding: 0;
+}
+
+/* 调整TikTok卡片位置 */
+.platform-card.tiktok {
+    grid-column: 2;  /* 放在第二列 */
+    grid-row: 2;     /* 放在第二行 */
 }
 
 /* 产品页面样式 */
@@ -1868,4 +1880,151 @@ html {
 
 .sub-title a:hover {
     color: #D4AF37;
+}
+
+.product-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.category-title {
+    font-size: 24px;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.product-item {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.product-item:hover {
+    transform: translateY(-5px);
+}
+
+.product-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.product-item h3 {
+    margin: 15px 0;
+    font-size: 18px;
+}
+
+.price {
+    color: #e6b800;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 20px;
+    background: #e6b800;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background: #cc9900;
+}
+
+/* 右侧固定导航 */
+.side-nav {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #fff;
+    border-radius: 30px;
+    padding: 15px 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.side-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.side-nav li {
+    margin: 15px 0;
+}
+
+.nav-icon {
+    display: block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #666;
+    transition: color 0.3s ease;
+}
+
+.nav-icon:hover {
+    color: #e6b800;
+}
+
+.sub-categories {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.sub-categories span {
+    display: block;
+    font-size: 14px;
+    color: #666;
+    margin: 5px 0;
+}
+
+.product-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-item .btn {
+    margin-top: auto;
+    margin-bottom: 15px;
+}
+
+/* Facebook 图标特定样式 */
+.platform-card.facebook {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.platform-card.facebook .platform-icon {
+    background: #1877f2;  /* Facebook品牌色 */
+    border-radius: 15px;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.platform-card.facebook .platform-icon i {
+    font-size: 80px;  /* 调整图标大小 */
+    color: white;     /* 图标颜色设为白色 */
+}
+
+/* 移除之前的图片相关样式 */
+.platform-card.facebook .platform-icon img {
+    display: none;
 }
