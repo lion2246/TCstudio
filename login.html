@@ -75,21 +75,36 @@
             e.preventDefault();
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+            
+            // 清除之前的错误信息
+            document.getElementById('loginError').textContent = '';
 
             try {
-                console.log('尝试登录:', { email, password });
-
                 const response = await fetch(`${API_BASE_URL}/auth/login`, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'  // 明确指定接受JSON响应
                     },
-                    body: JSON.stringify({ email, password })
+                    credentials: 'include',  // 包含cookies
+                    body: JSON.stringify({ 
+                        email: email.trim(), 
+                        password: password 
+                    })
                 });
 
-                console.log('服务器响应状态:', response.status);
+                // 检查响应状态
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                // 尝试解析JSON响应
+                const contentType = response.headers.get('content-type');
+                if (!contentType || !contentType.includes('application/json')) {
+                    throw new Error('服务器返回的不是JSON格式数据');
+                }
+
                 const data = await response.json();
-                console.log('服务器响应数据:', data);
 
                 if (data.token) {
                     localStorage.setItem('token', data.token);
@@ -97,11 +112,11 @@
                     localStorage.setItem('adminEmail', email);
                     window.location.href = 'admin.html';
                 } else {
-                    alert('登录失败：' + (data.error || '未知错误'));
+                    document.getElementById('loginError').textContent = data.error || '登录失败，请检查邮箱和密码';
                 }
             } catch (error) {
                 console.error('登录错误:', error);
-                alert('登录失败，请检查网络连接');
+                document.getElementById('loginError').textContent = '登录失败，请检查网络连接或联系管理员';
             }
         });
 
