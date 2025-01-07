@@ -81,71 +81,108 @@
             loginButton.disabled = true;
 
             try {
-                console.log('开始登录请求...');
-                const requestUrl = '/api/auth/login';
-                console.log('请求URL:', requestUrl);
+                // 检查当前域名和环境
+                const currentDomain = window.location.hostname;
+                const isProduction = currentDomain === 'www.tcstudio-ph.com';
+                console.log('环境信息:', {
+                    domain: currentDomain,
+                    isProduction,
+                    protocol: window.location.protocol,
+                    fullUrl: window.location.href
+                });
 
+                // 构建API URL
+                const requestUrl = '/api/auth/login';
+                console.log('API请求URL:', requestUrl);
+
+                // 发送登录请求
                 const requestOptions = {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
                     },
+                    credentials: 'same-origin',  // 添加凭证
                     body: JSON.stringify({ 
                         email: email.trim(), 
                         password: password 
                     })
                 };
 
-                console.log('发送登录请求...');
+                console.log('发送请求...');
                 const response = await fetch(requestUrl, requestOptions);
                 
-                console.log('收到响应:', {
+                // 记录响应信息
+                const responseInfo = {
                     status: response.status,
-                    statusText: response.statusText
+                    statusText: response.statusText,
+                    type: response.type,
+                    url: response.url
+                };
+                console.log('收到响应:', responseInfo);
+
+                // 记录响应头
+                const headers = {};
+                response.headers.forEach((value, name) => {
+                    headers[name] = value;
                 });
+                console.log('响应头:', headers);
 
                 // 读取响应内容
                 const responseText = await response.text();
-                console.log('原始响应内容:', responseText);
+                console.log('原始响应:', responseText);
 
-                // 处理特定的HTTP状态码
-                if (response.status === 401) {
-                    throw new Error('邮箱或密码错误');
-                }
-
-                if (response.status === 500) {
-                    throw new Error('服务器内部错误，请稍后重试');
+                // 处理特定的错误状态
+                switch (response.status) {
+                    case 405:
+                        throw new Error('服务器不支持此请求方法，请检查API配置');
+                    case 401:
+                        throw new Error('邮箱或密码错误');
+                    case 500:
+                        throw new Error('服务器内部错误，请稍后重试');
+                    case 404:
+                        throw new Error('API接口不存在，请检查服务器配置');
                 }
 
                 if (!response.ok) {
-                    throw new Error(`请求失败: ${response.status}`);
+                    throw new Error(`请求失败: ${response.status} - ${responseText}`);
                 }
 
                 // 尝试解析JSON
                 let data;
                 try {
                     data = JSON.parse(responseText);
+                    console.log('解析后的数据:', {
+                        success: !!data.token,
+                        hasError: !!data.error,
+                        message: data.message
+                    });
                 } catch (e) {
                     console.error('JSON解析错误:', e);
-                    throw new Error('服务器响应格式错误');
+                    throw new Error('服务器返回的数据格式不正确');
                 }
 
                 if (data.token) {
                     console.log('登录成功，准备跳转...');
+                    // 保存认证信息
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('adminLoggedIn', 'true');
                     localStorage.setItem('adminEmail', email);
+                    // 跳转到管理页面
                     window.location.href = 'admin.html';
                 } else if (data.error) {
                     throw new Error(data.error);
                 } else {
-                    throw new Error('登录失败：服务器未返回token');
+                    throw new Error('登录失败：服务器未返回有效的认证信息');
                 }
             } catch (error) {
-                console.error('登录错误:', error);
+                console.error('登录失败:', error);
+                // 显示用户友好的错误信息
                 document.getElementById('loginError').textContent = 
-                    error.message === 'Failed to fetch' ? '无法连接到服务器' : error.message;
+                    error.message === 'Failed to fetch' ? '无法连接到服务器，请检查网络连接' : error.message;
             } finally {
+                // 恢复按钮状态
                 loginButton.disabled = false;
             }
         });
