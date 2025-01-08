@@ -68,7 +68,7 @@
 
     <script>
         // 修改API基础URL配置
-        const API_BASE_URL = '/api';  // 使用相对路径
+        const API_BASE_URL = 'http://api.tcstudio-ph.com';  // 使用新的api子域名
 
         // 登录验证
         document.getElementById('loginForm').addEventListener('submit', async function(e) {
@@ -90,7 +90,7 @@
                 });
 
                 // 构建请求URL
-                const requestUrl = '/api/auth/login';
+                const requestUrl = `${API_BASE_URL}/api/auth/login`;
                 console.log('请求URL:', requestUrl);
 
                 // 发送登录请求
