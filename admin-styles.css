@@ -1,9 +1,21 @@
 /* 登录页面样式 */
 .login-page {
     min-height: 100vh;
+    background: -webkit-linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: -moz-linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: -o-linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
     display: flex;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
     align-items: center;
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
     justify-content: center;
     padding: 20px;
 }
@@ -11,13 +23,19 @@
 .login-container {
     width: 100%;
     max-width: 400px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .login-box {
     background: white;
     padding: 40px;
     border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .login-box h1 {
@@ -51,6 +69,9 @@
     border: 2px solid #eee;
     border-radius: 8px;
     font-size: 16px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
 
@@ -70,11 +91,17 @@
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease;
+    -webkit-transition: background-color 0.3s ease;
+    -moz-transition: background-color 0.3s ease;
+    -ms-transition: background-color 0.3s ease;
 }
 
 .login-form .admin-btn:hover {
     background: #c19b2f;
+    -webkit-transform: translateY(-1px);
+    -moz-transform: translateY(-1px);
+    -ms-transform: translateY(-1px);
     transform: translateY(-1px);
 }
 
@@ -108,6 +135,9 @@
     color: #333;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    text-decoration: none;
+    -webkit-text-decoration-skip: none;
+    text-decoration-skip-ink: none;
 }
 
 .back-home:hover {
@@ -131,6 +161,7 @@
     background: rgba(0, 0, 0, 0.5);
     z-index: 1000;
     backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
 .modal-content {
@@ -142,6 +173,10 @@
     border-radius: 15px;
     position: relative;
     animation: modalSlideIn 0.3s ease;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
 @keyframes modalSlideIn {
@@ -225,7 +260,19 @@
     border: 2px solid #fff;
     border-radius: 50%;
     border-right-color: transparent;
+    -webkit-animation: spin 0.8s linear infinite;
+    -moz-animation: spin 0.8s linear infinite;
     animation: spin 0.8s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
 }
 
 @keyframes spin {
@@ -243,4 +290,28 @@
 
 .error-message.show {
     display: block;
+} 
+
+/* 添加Safari兼容性 */
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    .modal {
+        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(5px);
+    }
+}
+
+/* 添加动画兼容性 */
+@-webkit-keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal {
+    -webkit-animation: fadeIn 0.3s ease;
+    animation: fadeIn 0.3s ease;
 } 
