@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Management Backend - T&C STUDIO</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="admin.js"></script>
+</head>
+<body>
+    <div class="admin-container">
+        <header class="admin-header">
+            <h1>T&C STUDIO Management Backend</h1>
+            <div class="admin-user">
+                <span id="adminUsername"></span>
+                <button onclick="logout()" class="logout-btn">Logout</button>
+            </div>
+        </header>
+
+        <main class="admin-content">
+            <!-- Product Management Area -->
+            <section class="manage-section">
+                <h2>Product Management</h2>
+                <div class="product-form">
+                    <form id="productForm">
+                        <!-- Product Basic Information -->
+                        <div class="form-group">
+                            <label for="productCategory">Product Category:</label>
+                            <select id="productCategory" name="category" required>
+                                <option value="">Please select a product category</option>
+                                <option value="bags">Bags Series</option>
+                                <option value="wallets">Wallets Series</option>
+                                <option value="luggage">Luggage Series</option>
+                                <option value="hats">Hats Series</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productSubCategory">Product Sub-Category:</label>
+                            <select id="productSubCategory" name="subCategory" required>
+                                <option value="">Please select a sub-category</option>
+                                <!-- Options will be loaded dynamically via JavaScript -->
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productName">Product Name:</label>
+                            <input type="text" id="productName" name="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productPrice">Price:</label>
+                            <input type="number" id="productPrice" name="price" min="1" required>
+                        </div>
+
+                        <!-- Color Options Management -->
+                        <div class="form-group">
+                            <label>Color Options:</label>
+                            <div id="colorOptions" class="color-options-container">
+                                <div class="color-option">
+                                    <input type="text" placeholder="Color Name" class="color-name">
+                                    <input type="file" accept="image/*" class="color-image">
+                                    <button type="button" class="remove-color">Remove</button>
+                                </div>
+                            </div>
+                            <button type="button" id="addColor" class="admin-btn">Add Color</button>
+                        </div>
+
+                        <!-- Sales Platform Links -->
+                        <div class="form-group">
+                            <label for="shopeeLink">Shopee Link:</label>
+                            <input type="url" id="shopeeLink" name="shopeeLink">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lazadaLink">Lazada Link:</label>
+                            <input type="url" id="lazadaLink" name="lazadaLink">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tiktokLink">TikTok Link:</label>
+                            <input type="url" id="tiktokLink" name="tiktokLink">
+                        </div>
+
+                        <button type="submit" class="admin-btn">Save Product</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Product List Area -->
+            <section class="manage-section">
+                <h2>Product List</h2>
+                <div class="product-list" id="productList">
+                    <!-- Product list will be loaded dynamically via JavaScript -->
+                </div>
+            </section>
+
+            <!-- Add Loading Indicator -->
+            <div id="loadingIndicator" class="loading-indicator">
+                <div class="spinner"></div>
+                <p>Processing...</p>
+            </div>
+
+            <!-- Add Edit Modal -->
+            <div id="editModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Edit Product</h2>
+                    <!-- Edit form will reuse the product form structure -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Check login status
+        if (!localStorage.getItem('adminLoggedIn')) {
+            window.location.href = 'login.html';
+        } else {
+            // Display admin username
+            document.getElementById('adminUsername').textContent = 
+                localStorage.getItem('adminUsername') || 'Admin';
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to log out?')) {
+                localStorage.removeItem('adminLoggedIn');
+                localStorage.removeItem('adminUsername');
+                localStorage.removeItem('loginTime');
+                window.location.href = 'login.html';
+            }
+        }
+
+        // Product category linkage
+        const productCategories = {
+            bags: [
+                // Women's series
+                {value: 'women-wallet', label: 'Women\'s Wallet'},
+                {value: 'women-backpack', label: 'Women\'s Backpack'},
+                {value: 'women-shoulder', label: 'Women\'s Shoulder Bag'},
+                // Men's series
+                {value: 'men-wallet', label: 'Men\'s Wallet'},
+                {value: 'men-backpack', label: 'Men\'s Backpack'},
+                {value: 'men-shoulder', label: 'Men\'s Shoulder Bag'},
+                {value: 'men-handbag', label: 'Men\'s Handbag'},
+                // Original bags series
+                {value: 'laptop-backpack', label: 'Laptop Backpack Series'},
+                {value: 'fashion-backpack', label: 'Fashion Backpack Series'},
+                {value: 'mini-backpack', label: 'Mini Backpack Series'},
+                {value: 'casual-backpack', label: 'Casual Double Backpack Series'},
+                {value: 'business-backpack', label: 'Business Double Backpack Series'},
+                {value: 'casual-men-backpack', label: 'Casual Backpack Series'},
+                {value: 'classic-shoulder-bag', label: 'Classic Single Shoulder Bag Series'},
+                {value: 'chain-crossbody-bag', label: 'Chain Crossbody Bag Series'},
+                {value: 'handheld-shoulder-bag', label: 'Handheld Single Shoulder Bag Series'},
+                {value: 'business-shoulder-bag', label: 'Business Single Shoulder Bag Series'},
+                {value: 'casual-shoulder-bag', label: 'Casual Single Shoulder Bag Series'},
+                {value: 'sport-shoulder-bag', label: 'Sports Single Shoulder Bag Series'},
+                {value: 'business-handbag', label: 'Business Handbag Series'},
+                {value: 'casual-handbag', label: 'Casual Handbag Series'},
+                {value: 'briefcase', label: 'Business Briefcase Series'}
+            ],
+            wallets: [
+                // Wallet series
+                {value: 'fashion-long-wallet', label: 'Fashion Long Wallet Series'},
+                {value: 'business-long-wallet', label: 'Business Long Wallet Series'},
+                {value: 'classic-short-wallet', label: 'Classic Short Wallet Series'},
+                {value: 'simple-short-wallet', label: 'Simple Short Wallet Series'},
+                {value: 'multi-card-wallet', label: 'Multi-card Wallet Series'},
+                {value: 'card-coin-wallet', label: 'Card & Coin Wallet Series'}
+            ],
+            luggage: [
+                // Luggage series
+                {value: 'luggage', label: 'Luggage'},
+                {value: 'travel-bag', label: 'Travel Bag'},
+                {value: 'carry-case', label: 'Carry-on Travel Bag'},
+                // Original luggage series
+                {value: 'carry-on-luggage', label: '20-inch Check-in Luggage Series'},
+                {value: 'medium-luggage', label: '24-inch Luggage Series'},
+                {value: 'large-luggage', label: '28-inch Check-in Luggage Series'},
+                {value: 'large-travel-bag', label: 'Large Capacity Travel Bag Series'},
+                {value: 'sport-travel-bag', label: 'Sports Travel Bag Series'},
+                {value: 'light-travel-bag', label: 'Lightweight Travel Bag Series'},
+                {value: 'business-carry-case', label: 'Business Carry-on Case Series'},
+                {value: 'fashion-carry-case', label: 'Fashion Carry-on Case Series'},
+                {value: 'light-carry-case', label: 'Lightweight Carry-on Case Series'}
+            ],
+            hats: [
+                // Hats series
+                {value: 'baseball-cap', label: 'Baseball Cap'},
+                {value: 'bucket-hat', label: 'Bucket Hat'},
+                {value: 'sun-hat', label: 'Sun Hat'},
+                // Original hats series
+                {value: 'classic-baseball-cap', label: 'Classic Baseball Cap Series'},
+                {value: 'fashion-baseball-cap', label: 'Fashion Baseball Cap Series'},
+                {value: 'sport-baseball-cap', label: 'Sports Baseball Cap Series'},
+                {value: 'casual-baseball-cap', label: 'Casual Baseball Cap Series'},
+                {value: 'classic-bucket-hat', label: 'Classic Bucket Hat Series'},
+                {value: 'fashion-bucket-hat', label: 'Fashion Bucket Hat Series'},
+                {value: 'sport-bucket-hat', label: 'Sports Bucket Hat Series'},
+                {value: 'casual-bucket-hat', label: 'Casual Bucket Hat Series'},
+                {value: 'outdoor-bucket-hat', label: 'Outdoor Bucket Hat Series'},
+                {value: 'elegant-sun-hat', label: 'Elegant Sun Hat Series'},
+                {value: 'vacation-sun-hat', label: 'Vacation Sun Hat Series'},
+                {value: 'sun-protection-hat', label: 'Sun Protection Hat Series'}
+            ]
+        };
+
+        // Add event listeners
+        document.getElementById('productCategory').addEventListener('change', function() {
+            const subCategory = document.getElementById('productSubCategory');
+            const selectedCategory = this.value;
+            
+            // Clear existing options
+            subCategory.innerHTML = '<option value="">Please select a sub-category</option>';
+            
+            if (selectedCategory && productCategories[selectedCategory]) {
+                productCategories[selectedCategory].forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.value;
+                    option.textContent = item.label;
+                    subCategory.appendChild(option);
+                });
+            }
+        });
+
+        // Add color options
+        document.getElementById('addColor').addEventListener('click', function() {
+            const colorOptionsContainer = document.getElementById('colorOptions');
+            const newColorOption = document.createElement('div');
+            newColorOption.className = 'color-option';
+            newColorOption.innerHTML = `
+                <input type="text" placeholder="Color Name" class="color-name">
+                <input type="file" accept="image/*" class="color-image">
+                <button type="button" class="remove-color">Remove</button>
+            `;
+            colorOptionsContainer.appendChild(newColorOption);
+        });
+
+        // Remove color options
+        document.getElementById('colorOptions').addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-color')) {
+                e.target.parentElement.remove();
+            }
+        });
+
+        // Form submission handling
+        const storage = new GitHubStorage();
+
+        document.getElementById('productForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const colorOptions = document.querySelectorAll('.color-option');
+            const colors = [];
+
+            // Collect color information
+            colorOptions.forEach(option => {
+                const name = option.querySelector('.color-name').value;
+                const imageFile = option.querySelector('.color-image').files[0];
+                if (name && imageFile) {
+                    colors.push({ name, image: imageFile });
+                }
+            });
+
+            const productData = {
+                category: formData.get('category'),
+                subCategory: formData.get('subCategory'),
+                name: formData.get('name'),
+                price: formData.get('price'),
+                colors: colors,
+                platforms: {
+                    shopee: formData.get('shopeeLink'),
+                    lazada: formData.get('lazadaLink'),
+                    tiktok: formData.get('tiktokLink')
+                }
+            };
+
+            try {
+                const saved = await storage.saveProduct(productData);
+                if (saved) {
+                    alert('Product saved successfully!');
+                    this.reset();
+                    storage.loadProductList(); // Reload product list
+                } else {
+                    alert('Save failed, please try again.');
+                }
+            } catch (error) {
+                console.error('Error saving product:', error);
+                alert('Save failed, please check your network connection and try again.');
+            }
+        });
+
+        // Initialize storage object
+        const storage = new GitHubStorage();
+
+        // Load product list after page load
+        document.addEventListener('DOMContentLoaded', () => {
+            storage.loadProductList();
+        });
+
+        // Edit product
+        async function editProduct(productId) {
+            try {
+                storage.setLoading(true);
+                const data = await storage.getProducts();
+                const product = data.products.find(p => p.id === productId);
+                
+                if (!product) {
+                    throw new Error('Product does not exist');
+                }
+
+                // Populate form
+                document.getElementById('productCategory').value = product.category;
+                // Trigger category change event to load sub-categories
+                document.getElementById('productCategory').dispatchEvent(new Event('change'));
+                
+                setTimeout(() => {
+                    document.getElementById('productSubCategory').value = product.subCategory;
+                    document.getElementById('productName').value = product.name;
+                    document.getElementById('productPrice').value = product.price;
+                    document.getElementById('shopeeLink').value = product.platforms.shopee || '';
+                    document.getElementById('lazadaLink').value = product.platforms.lazada || '';
+                    document.getElementById('tiktokLink').value = product.platforms.tiktok || '';
+                }, 100);
+
+                // Scroll to form position
+                document.querySelector('.product-form').scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                console.error('Failed to load product details:', error);
+                alert('Failed to load product details, please try again');
+            } finally {
+                storage.setLoading(false);
+            }
+        }
+
+        // Delete product
+        async function deleteProduct(productId) {
+            if (!confirm('Are you sure you want to delete this product? This action cannot be undone.')) {
+                return;
+            }
+
+            try {
+                await storage.deleteProduct(productId);
+                alert('Product deleted successfully');
+                storage.loadProductList(); // Reload product list
+            } catch (error) {
+                console.error('Failed to delete product:', error);
+                alert('Delete failed, please try again');
+            }
+        }
+    </script>
+</body>
+</html> 

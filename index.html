@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="T&C STUDIO - 精品包包与帽子，高品质时尚配饰">
+    <meta name="keywords" content="包包,帽子,时尚,配饰,T&C STUDIO">
+    <title>T&C STUDIO - 精品包包与帽子</title>
+    
+    <!-- 性能优化 -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- 预加载关键资源 -->
+    <link rel="preload" href="images/tc-logo.png" as="image">
+    <link rel="preload" href="images/products/main-featured.jpg" as="image">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 顶部标题区域 -->
+    <header class="header">
+        <div class="logo-container">
+            <img src="images/tc-logo.png" alt="T&C STUDIO Logo" class="logo">
+            <h1>T&C STUDIO</h1>
+        </div>
+        
+        <!-- 汉堡菜单按钮 -->
+        <div class="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
+        <!-- 导航菜单 -->
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="about.html">Sales Platforms</a></li>
+                <li><a href="about-us.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 灵动导航 -->
+    <nav class="floating-nav">
+        <ul>
+            <li>
+                <a href="#home" class="nav-item active">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="products.html" class="nav-item">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>Products</span>
+                </a>
+            </li>
+            <li>
+                <a href="about.html" class="nav-item">
+                    <i class="fas fa-store"></i>
+                    <span>Sales Platforms</span>
+                </a>
+            </li>
+            <li>
+                <a href="about-us.html" class="nav-item">
+                    <i class="fas fa-info-circle"></i>
+                    <span>About Us</span>
+                </a>
+            </li>
+            <li>
+                <a href="contact.html" class="nav-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>Contact</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- 产品拼图展示 -->
+    <section id="home" class="product-mosaic">
+        <div class="mosaic-container">
+            <div class="mosaic-grid">
+                <!-- Main: New Arrivals -->
+                <a href="products.html#wallets" class="mosaic-item large">
+                    <img src="images/products/main-featured.jpg" alt="New Arrivals" class="featured-image" loading="lazy">
+                    <div class="mosaic-content">
+                        <h2>New Arrivals</h2>
+                    </div>
+                </a>
+                <!-- Crossbody Bags -->
+                <a href="products.html#bags" class="mosaic-item">
+                    <img src="images/products/crossbody-bags.jpg" alt="Crossbody Bags" loading="lazy">
+                    <div class="mosaic-content">
+                        <h3>Crossbody Bags</h3>
+                    </div>
+                </a>
+                <!-- Travel Bags -->
+                <a href="products.html#travel" class="mosaic-item">
+                    <img src="images/products/travel-bags.jpg" alt="Travel Bags" loading="lazy">
+                    <div class="mosaic-content">
+                        <h3>Travel Bags / Laptop Bags</h3>
+                    </div>
+                </a>
+                <!-- Backpacks -->
+                <a href="products.html#backpacks" class="mosaic-item">
+                    <img src="images/products/backpacks.jpg" alt="Backpacks" loading="lazy">
+                    <div class="mosaic-content">
+                        <h3>Backpacks</h3>
+                    </div>
+                </a>
+                <!-- Wallets -->
+                <a href="products.html#wallets" class="mosaic-item">
+                    <img src="images/products/wallets.jpg" alt="Wallets" loading="lazy">
+                    <div class="mosaic-content">
+                        <h3>Wallets</h3>
+                    </div>
+                </a>
+                <!-- Hats -->
+                <a href="products.html#hats" class="mosaic-item">
+                    <img src="images/products/hats.png" alt="Hats" loading="lazy">
+                    <div class="mosaic-content">
+                        <h3>Hats</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- 在轮播图区域后添加公司简介部分 -->
+    <section id="about" class="company-intro">
+        <div class="intro-container">
+            <h2 class="section-title">About Us</h2>
+            <div class="intro-content">
+                <div class="intro-text">
+                    <h3>T&C STUDIO</h3>
+                    <p>T&C STUDIO is a fashion brand focused on designing and crafting high-quality bags and hats. We pursue perfection in every detail, blending traditional craftsmanship with modern design to bring a unique fashion experience to those who seek quality living.</p>
+                    <p>Our design team draws inspiration from global fashion trends and local cultural elements, creating a product line that is both international and distinctive. Every product is made from carefully selected materials and goes through strict quality control to ensure excellence.</p>
+                    <div class="about-btn-container">
+                        <a href="about-us.html" class="about-btn">
+                            Learn More
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="intro-features">
+                        <div class="feature">
+                            <i class="fas fa-gem"></i>
+                            <h4>Premium Craftsmanship</h4>
+                            <p>Selected Materials, Exquisite Workmanship</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-paint-brush"></i>
+                            <h4>Original Design</h4>
+                            <p>Unique Style, Show Your Personality</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-heart"></i>
+                            <h4>Quality Assurance</h4>
+                            <p>Strict Quality Control, Dedicated Service</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 产品分类展示 -->
+    <section id="products" class="product-categories">
+        <!-- 钱包系列 -->
+        <div class="category">
+            <h2>Wallets</h2>
+            <div class="product-grid">
+                <div class="product-item">
+                    <img src="images/products/wallet-women.jpg" alt="Women Wallet" loading="lazy">
+                    <h3>Women</h3>
+                    <a class="btn" href="products.html#wallets-women">View Collection</a>
+                </div>
+                <div class="product-item">
+                    <img src="images/products/wallet-men.jpg" alt="Men Wallet" loading="lazy">
+                    <h3>Men</h3>
+                    <a class="btn" href="products.html#wallets-men">View Collection</a>
+                </div>
+                <div class="product-item">
+                    <img src="images/products/placeholder.png" alt="Kids Wallet" loading="lazy">
+                    <h3>Kids Wallet</h3>
+                    <a class="btn" href="products.html#wallets-kids">View Collection</a>
+                </div>
+            </div>
+        </div>
+        <!-- 包包系列 -->
+        <div class="category">
+            <h2>Bags</h2>
+            <div class="product-grid">
+                <div class="product-item">
+                    <img src="images/products/bag-women.jpg" alt="Ladies Bag" loading="lazy">
+                    <h3>Ladies Bag</h3>
+                    <a class="btn" href="products.html#bags-ladies">View Collection</a>image.png
+                </div>
+                <div class="product-item">
+                    <img src="images/products/bag-men.jpg" alt="Men Bag" loading="lazy">
+                    <h3>Men Bag</h3>
+                    <a class="btn" href="products.html#bags-men">View Collection</a>
+                </div>
+                <div class="product-item">
+                    <img src="images/products/placeholder.png" alt="Kids Bag" loading="lazy">
+                    <h3>Kids Bag</h3>
+                    <a class="btn" href="products.html#bags-kids">View Collection</a>
+                </div>
+            </div>
+        </div>
+        <!-- 背包系列 -->
+        <div class="category">
+            <h2>Backpacks</h2>
+            <div class="product-grid">
+                <div class="product-item">
+                    <img src="images/products/backpack-women.jpg" alt="Women Backpack" loading="lazy">
+                    <h3>Women</h3>
+                    <a class="btn" href="products.html#backpacks-women">View Collection</a>
+                </div>
+                <div class="product-item">
+                    <img src="images/products/backpack-men.jpg" alt="Men Backpack" loading="lazy">
+                    <h3>Men</h3>
+                    <a class="btn" href="products.html#backpacks-men">View Collection</a>
+                </div>
+                <div class="product-item">
+                    <img src="images/products/backpack-student.jpg" alt="Student Backpack" loading="lazy">
+                    <h3>Student</h3>
+                    <a class="btn" href="products.html#backpacks-student">View Collection</a>
+                </div>
+            </div>
+        </div>
+        <!-- Travel & Commuting 系列 -->
+        <div class="category">
+            <h2>Travel & Commuting</h2>
+            <div class="product-grid">
+                <div class="product-item">
+                    <img src="images/products/travelbag.jpg" alt="Travel Bag" loading="lazy">
+                    <h3>Travel Bag</h3>
+                    <a class="btn" href="products.html#travel-travel">View Collection</a>
+                </div>
+                <div class="product-item">
+                    <img src="images/products/toiletrybag.jpg" alt="Toiletry Bag" loading="lazy">
+                    <h3>Toiletry Bag</h3>
+                    <a class="btn" href="products.html#travel-toiletry">View Collection</a>
+                </div>
+                <div class="product-item">
+                    <img src="images/products/laptopbag.jpg" alt="Laptop Bag" loading="lazy">
+                    <h3>Laptop Bag</h3>
+                    <a class="btn" href="products.html#travel-laptop">View Collection</a>
+                </div>
+            </div>
+        </div>
+        <!-- 帽子系列 -->
+        <div class="category">
+            <h2>Hats</h2>
+            <div class="product-grid">
+                <div class="product-item">
+                    <img src="images/products/hat-women.jpg" alt="Women Hat" loading="lazy">
+                    <h3>Women</h3>
+                    <a class="btn" href="products.html#hats-women">View Collection</a>
+                </div>
+                <div class="product-item">
+                    <img src="images/products/hat-men.jpg" alt="Men Hat" loading="lazy">
+                    <h3>Men</h3>
+                    <a class="btn" href="products.html#hats-men">View Collection</a>
+                </div>
+                <div class="product-item">
+                    <img src="images/products/kids-hat.jpg" alt="Kids Hat" loading="lazy">
+                    <h3>Kids</h3>
+                    <a class="btn" href="products.html#hats-kids">View Collection</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页面底部 -->
+    <footer class="footer">
+        <div class="contact-info">
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <p>09629699456</p>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <p>TCstudio1@outlook.com</p>
+            </div>
+            <div class="social-media">
+                <a href="#"><i class="fab fa-weixin"></i></a>
+                <a href="#"><i class="fab fa-viber"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>Copyright © T&C STUDIO 2024. All rights reserved.</p>
+        </div>
+
+        <!-- 微信二维码灵动岛 -->
+        <div id="wechat-qr" class="floating-qr">
+            <div class="qr-content">
+                <h3>Scan QR code to follow WeChat</h3>
+                <img src="images/qr/wechat-qr.png" alt="WeChat QR Code" class="qr-code">
+            </div>
+        </div>
+
+        <!-- Viber 二维码灵动岛 -->
+        <div id="viber-qr" class="floating-qr">
+            <div class="qr-content">
+                <h3>Scan QR code to add Viber</h3>
+                <img src="images/qr/viber-qr.png" alt="Viber QR Code" class="qr-code">
+            </div>
+        </div>
+    </footer>
+
+
+
+    <!-- 在 body 标签结束前添加或修改 JavaScript -->
+    <script>
+        // 汉堡菜单功能
+        const hamburger = document.querySelector('.hamburger-menu');
+        const nav = document.querySelector('.main-nav');
+        const navLinks = document.querySelectorAll('.main-nav a');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            nav.classList.toggle('active');
+        });
+
+        // 点击导航链接时关闭菜单
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                nav.classList.remove('active');
+            });
+        });
+
+        // 点击菜单外部关闭菜单
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !nav.contains(e.target)) {
+                hamburger.classList.remove('active');
+                nav.classList.remove('active');
+            }
+        });
+
+        // 获取所有导航项
+        const navItems = document.querySelectorAll('.nav-item');
+
+        // 处理页面内链接的点击事件
+        navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                const href = item.getAttribute('href');
+                
+                // 如果是页面内链接（以#开头）
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    const targetId = href.slice(1);
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+                // 如果是外部链接，正常跳转
+            });
+        });
+
+        // 滚动监听
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY;
+
+            // 获取所有section
+            document.querySelectorAll('section').forEach(section => {
+                const sectionTop = section.offsetTop - 100; // 偏移量，根据需要调整
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    // 移除所有active类
+                    navItems.forEach(item => item.classList.remove('active'));
+                    
+                    // 为当前section对应的导航项添加active类
+                    const correspondingNavItem = document.querySelector(`.nav-item[href="#${sectionId}"]`);
+                    if (correspondingNavItem) {
+                        correspondingNavItem.classList.add('active');
+                    }
+                }
+            });
+        });
+
+        // 手势支持 - 滑动关闭菜单
+        let startX = 0;
+        let startY = 0;
+        let isDragging = false;
+
+        document.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+            isDragging = false;
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (!isDragging) {
+                const deltaX = Math.abs(e.touches[0].clientX - startX);
+                const deltaY = Math.abs(e.touches[0].clientY - startY);
+                
+                if (deltaX > deltaY && deltaX > 10) {
+                    isDragging = true;
+                }
+            }
+        });
+
+        document.addEventListener('touchend', (e) => {
+            if (isDragging && nav.classList.contains('active')) {
+                const endX = e.changedTouches[0].clientX;
+                const deltaX = endX - startX;
+                
+                // 向右滑动关闭菜单
+                if (deltaX > 50) {
+                    hamburger.classList.remove('active');
+                    nav.classList.remove('active');
+                }
+            }
+        });
+
+        // 图片懒加载优化
+        const images = document.querySelectorAll('img[loading="lazy"]');
+        
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.src; // 触发加载
+                        img.classList.add('loaded');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            images.forEach(img => imageObserver.observe(img));
+        }
+
+        // 触摸反馈优化
+        const touchElements = document.querySelectorAll('.product-item, .mosaic-item, .btn, .nav-item');
+        
+        touchElements.forEach(element => {
+            element.addEventListener('touchstart', () => {
+                element.style.transform = 'scale(0.98)';
+            });
+            
+            element.addEventListener('touchend', () => {
+                element.style.transform = '';
+            });
+        });
+
+        // 页面加载完成处理
+        window.addEventListener('load', () => {
+            // 初始化页面动画
+            const animatedElements = document.querySelectorAll('.mosaic-item, .product-item, .feature');
+            animatedElements.forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+
+        // 性能监控
+        if ('performance' in window) {
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    const perfData = performance.getEntriesByType('navigation')[0];
+                    console.log('页面加载时间:', perfData.loadEventEnd - perfData.loadEventStart, 'ms');
+                }, 0);
+            });
+        }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取微信图标和二维码元素
+            const wechatIcon = document.querySelector('.fa-weixin').parentElement;
+            const wechatQR = document.getElementById('wechat-qr');
+            // 获取 Viber 图标和二维码元素
+            const viberIcon = document.querySelector('.fa-viber').parentElement;
+            const viberQR = document.getElementById('viber-qr');
+
+            if (wechatIcon && wechatQR) {
+                // 微信二维码事件
+                wechatIcon.addEventListener('mouseenter', function() {
+                    wechatQR.classList.add('show');
+                });
+
+                wechatIcon.addEventListener('mouseleave', function() {
+                    wechatQR.classList.remove('show');
+                });
+
+                wechatQR.addEventListener('mouseenter', function() {
+                    wechatQR.classList.add('show');
+                });
+
+                wechatQR.addEventListener('mouseleave', function() {
+                    wechatQR.classList.remove('show');
+                });
+            }
+
+            if (viberIcon && viberQR) {
+                // Viber 二维码事件
+                viberIcon.addEventListener('mouseenter', function() {
+                    viberQR.classList.add('show');
+                });
+
+                viberIcon.addEventListener('mouseleave', function() {
+                    viberQR.classList.remove('show');
+                });
+
+                viberQR.addEventListener('mouseenter', function() {
+                    viberQR.classList.add('show');
+                });
+
+                viberQR.addEventListener('mouseleave', function() {
+                    viberQR.classList.remove('show');
+                });
+            }
+        });
+    </script>
+
+    <a href="login.html" class="admin-entry">
+        <i class="fas fa-user-shield"></i>
+    </a>
+</body>
+</html> 
