@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - T&C STUDIO</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="login-page">
+    <!-- Back to Home Button -->
+    <a href="index.html" class="back-home">
+        <i class="fas fa-home"></i>
+        <span>Back to Home</span>
+    </a>
+
+    <div class="login-container">
+        <div class="login-box">
+            <h1>T&C STUDIO</h1>
+            <h2>Admin Login</h2>
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="admin-btn">Login</button>
+                <div class="forgot-password">
+                    <a href="#" onclick="showResetPassword()">Forgot Password?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Password Reset Modal -->
+    <div id="resetPasswordModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeResetPassword()">&times;</span>
+            <h2>Reset Password</h2>
+            <form id="resetPasswordForm" class="reset-form">
+                <div class="form-group">
+                    <label for="resetEmail">Verification Email</label>
+                    <input type="email" id="resetEmail" name="resetEmail" value="TCstudio1@outlook.com" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="verificationCode">Verification Code</label>
+                    <div class="verification-code-group">
+                        <input type="text" id="verificationCode" name="verificationCode" required>
+                        <button type="button" onclick="sendVerificationCode()" class="send-code-btn">Send Code</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">New Password</label>
+                    <input type="password" id="newPassword" name="newPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm New Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                </div>
+                <button type="submit" class="admin-btn">Reset Password</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Login Verification
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === 'admin' && password === '.sY740923279') {
+                localStorage.setItem('adminLoggedIn', 'true');
+                localStorage.setItem('adminUsername', username);
+                localStorage.setItem('loginTime', new Date().toISOString());
+                window.location.href = 'admin.html';
+            } else {
+                alert('Username or Password is incorrect!');
+                document.getElementById('password').value = '';
+            }
+        });
+
+        // Show Password Reset Modal
+        function showResetPassword() {
+            document.getElementById('resetPasswordModal').style.display = 'block';
+        }
+
+        // Close Password Reset Modal
+        function closeResetPassword() {
+            document.getElementById('resetPasswordModal').style.display = 'none';
+        }
+
+        // Send Verification Code
+        let verificationCode = '';
+        function sendVerificationCode() {
+            // Generate a 6-digit random verification code
+            verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
+            alert(`Verification code has been sent to your email: ${verificationCode}`);
+            // In a real application, this would call a backend API to send the email
+        }
+
+        // Password Reset Form Submission
+        document.getElementById('resetPasswordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const inputCode = document.getElementById('verificationCode').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (!verificationCode) {
+                alert('Please get the verification code first');
+                return;
+            }
+
+            if (inputCode !== verificationCode) {
+                alert('Incorrect verification code');
+                return;
+            }
+
+            if (newPassword !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+
+            // This would call a backend API to update the password
+            alert('Password reset successful!');
+            closeResetPassword();
+        });
+    </script>
+</body>
+</html> 
