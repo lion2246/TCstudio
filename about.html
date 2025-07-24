@@ -102,7 +102,7 @@
                     </div>
                     <h3>TikTok Shop</h3>
                     <p>T&C STUDIO TikTok Official Store</p>
-                    <a href="#" class="platform-link" target="_blank">
+                    <a href="https://vt.tiktok.com/ZSBowQ6GS/?page=TikTokShop" class="platform-link" target="_blank" onclick="console.log('TikTok link clicked');">
                         <i class="fas fa-external-link-alt"></i>
                         Visit Store
                     </a>
@@ -121,7 +121,7 @@
             </div>
             <div class="contact-item">
                 <i class="fas fa-envelope"></i>
-                <p>TCstudio1@outlook.com</p>
+                <p>tcstudio1@outlook.com</p>
             </div>
             <div class="social-media">
                 <a href="#"><i class="fab fa-weixin"></i></a>
@@ -191,6 +191,18 @@
         });
 
         document.addEventListener('DOMContentLoaded', function() {
+            // 确保平台链接正常工作
+            const platformLinks = document.querySelectorAll('.platform-link');
+            platformLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    console.log('Platform link clicked:', this.href);
+                    // 确保链接在新标签页中打开
+                    if (this.target === '_blank') {
+                        window.open(this.href, '_blank');
+                    }
+                });
+            });
+
             // Get WeChat icon and QR code elements
             const wechatIcon = document.querySelector('.fa-weixin').parentElement;
             const wechatQR = document.getElementById('wechat-qr');
